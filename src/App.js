@@ -8,13 +8,14 @@ function App() {
 
   useEffect(() => {
     telWebApp.ready();
-  }, []);
+  }, [telWebApp]);
 
   return (
     <div className="App">
       <Header />
 
       <button onClick={onToggleButton}>toggle</button>
+      
     </div>
   );
 }
