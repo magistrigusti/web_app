@@ -4,13 +4,13 @@ import Button from '../Button/Button';
 import { useTelegram } from '../hooks/useTelegram';
 
 const Header = () => {
-  const { user, onClose, telWebApp } = useTelegram();
+  const { user, onClose} = useTelegram();
   return (
     <div className='header'>
       <Button onClick={onClose}>Close it</Button>
 
       <span className={'username'}>
-        {user?.username}, {telWebApp.initDataUnsafe?.user?.username}
+        {user?.username}
       </span>
 
     </div>
