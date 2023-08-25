@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import { useTelegram } from './components/hooks/useTelegram';
 
 function App() {
+  const { telWebApp, onToggleButton } = useTelegram();
 
   useEffect(() => {
     telWebApp.ready();
@@ -9,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      
+      <button onClick={onToggleButton}>toggle</button>
     </div>
   );
 }

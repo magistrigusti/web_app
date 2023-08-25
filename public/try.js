@@ -1,22 +1,18 @@
-const telWebApp = window.Telegram.WebApp;
+import React from 'react';
+import './Header.css';
+import Button from '../Button/Button';
+import { useTelegram } from '../../hooks/useTelegram';
 
-export function useTelegram() {
-  const onClose = () => {
-    telWebApp.close();
-  };
+const Header = () => {
+  const { user, onClose } = useTelegram();
 
-  const onToggleButton = () => {
-    if (telWebApp.MainButton.isVisible) {
-      telWebApp.MainButton.hide();
-    } else {
-      telWebApp.MainButton.show();
-    };
-  };
+  return (
+    <div className="header">
+      <Button onClick={onClose}>Close it</Button>
 
-  return {
-    onClose,
-    onToggleButton,
-    telWebApp,
-    user: telWebApp.initDataUnsafe?.user,
-  }
+      <span className="username">
+        {user?.username}
+      </span>
+    </div>
+  )
 }
