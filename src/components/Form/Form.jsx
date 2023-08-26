@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTelegram } from '../hooks/useTelegram';
 import './Form.css';
 
 const Form = () => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
   const [subject, setSubject] = useState('physical');
+  const { telWebApp } = useTelegram();
+
+  useEffect(() => {
+    telWebApp.MainButton.setParams({
+      text: 'Send text'
+    })
+  },[]);
+
+  useEffect(() => {
+    if (!country || !city) {
+      telWebApp.MainButton.hide();
+    } else {
+      telWebApp.MainButton.show();
+    }
+  }, [country, city]);
 
   const onChangeCountry = (event) => {
     setCountry(event.target.value);
