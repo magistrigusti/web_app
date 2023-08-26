@@ -8,6 +8,24 @@ const Form = () => {
   const [subject, setSubject] = useState('physical');
   const { telWebApp } = useTelegram();
 
+  const onSendData = useCallback(() => {
+    const data = {
+      country,
+      city,
+      subject,
+    }
+
+    telWebApp.sendData(JSON.stringify(data));
+  }, [])
+
+  useEffect(() => {
+    telWebApp.onEvent('mainButtonClicked', onSendData);
+
+    return () => {
+      telWebApp.offEvent('mainButtonClicked', onSendData);
+    }
+  }, [])
+
   useEffect(() => {
     telWebApp.MainButton.setParams({
       text: 'Send text'
