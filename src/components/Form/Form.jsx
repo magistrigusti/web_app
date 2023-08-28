@@ -16,7 +16,7 @@ const Form = () => {
     }
 
     telWebApp.sendData(JSON.stringify(data));
-  }, [])
+  }, []);
 
   useEffect(() => {
     telWebApp.onEvent('mainButtonClicked', onSendData);
@@ -50,7 +50,7 @@ const Form = () => {
 
   const onChangeSubject = (event) => {
     setSubject(event.target.value);
-  }
+  };
 
   return (
     <div className="form">
@@ -70,7 +70,7 @@ const Form = () => {
       />
 
       <select className="select" onChange={onChangeSubject}>
-        <option value={'physical'}>Phisical</option>
+        <option value={'physical'}>Physical</option>
         <option value={'legal'}>Legal</option>
       </select>
     </div>
