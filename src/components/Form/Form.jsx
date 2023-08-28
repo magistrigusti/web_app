@@ -16,7 +16,7 @@ const Form = () => {
     }
 
     telWebApp.sendData(JSON.stringify(data));
-  }, []);
+  }, [country, city, subject]);
 
   useEffect(() => {
     telWebApp.onEvent('mainButtonClicked', onSendData);
@@ -24,7 +24,7 @@ const Form = () => {
     return () => {
       telWebApp.offEvent('mainButtonClicked', onSendData);
     }
-  }, [])
+  }, [onSendData])
 
   useEffect(() => {
     telWebApp.MainButton.setParams({
