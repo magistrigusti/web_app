@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import { useTelegram } from '../hooks/useTelegram';
-import './From.css';
+import './Form.css';
 
 const Form = () => {
   const [country, setCountry] = useState('');
@@ -15,23 +15,23 @@ const Form = () => {
       subject
     }
     telWebApp.sendData(JSON.stringify(data));
-  }, []);
+  }, [country, city, subject]);
 
   useEffect(() => {
     telWebApp.onEvent('mainButtonClicked', onSendData);
     return () => {
       telWebApp.offEvent('mainButtonClicked', onSendData);
     }
+  }, [onSendData]);
+
+  useEffect(() => {
+    telWebApp.MainButtom.setParams({
+      text: 'send text';
+    });
   }, []);
 
   useEffect(() => {
-    telWebApp.mainButton.setParams({
-      text: 'send text'
-    })
-  }, []);
-
-  useEffect(() => {
-    if(!country || !city) {
+    if (!country || !city) {
       telWebApp.MainButton.hide();
     } else {
       telWebApp.MainButton.show();
@@ -39,40 +39,39 @@ const Form = () => {
   }, [country, city]);
 
   const onChangeCountry = (event) => {
-    setCountry(event.targrt.value);
+    setCountry(event.target.value);
   };
 
   const onChangeCity = (event) => {
-    setCity(event.targrt.value);
-  };
+    setCity(event.target.value);
+  }
 
   const onChangeSubject = (event) => {
     setSubject(event.target.value);
-  };
+  }
 
   return (
     <div className="form">
-      <h3>Enter your details</h3>
+      <h3> Enter yuor details</h3>
 
-      <input className="input"
-          type="text"
-          placeholder='Country'
+      <input className='input'
+          type='text'
+          placeholder='your country'
           value={country}
           onChange={onChangeCountry}
       />
 
-      <input className="input"
+      <input className='input'
           type='text'
-          placeholder="City"
-          value={city}
+          placeholder='your city'
+          value={country}
           onChange={onChangeCity}
       />
 
-      <select className="select" onChange={onChangeSubject}>
+      <select className='select' onChange={onChangeSubject}>
         <option value={'physical'}>Physical</option>
         <option value={'legal'}>Legal</option>
       </select>
-
     </div>
   )
 
