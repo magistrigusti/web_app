@@ -15,6 +15,12 @@ const products = [
     {id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая'},
 ];
 
+const getTotalPrice = (items = []) => {
+  return items.reduce((acc,item) => {
+    return acc += item.price;
+  }, 0)
+}
+
 const ProductList = () => {
   const [addedItems, setAddedItems] = useState([]);
   const { telWebApp } = useTelegram();
@@ -30,6 +36,15 @@ const ProductList = () => {
     }
 
     setAddedItems(newItems);
+
+    if (newItems.length === 0) {
+      telWebApp.MainButton.hide();
+    } else {
+      telWebApp.MainButton.show();
+      telWebApp.MainButton.setParams({
+        text: `Bye ${getTotalPrice(newItems)}`
+      })
+    }
   };
 
   return (
