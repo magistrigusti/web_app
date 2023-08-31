@@ -33,9 +33,9 @@ const ProductList = () => {
   };
 
   return (
-    <div className='list'>
+    <div className={'list'}>
       {products.map(item => (
-        <ProductItem className="item" product={item} onAdd={onAdd} />
+        <ProductItem className={"item"} product={item} onAdd={onAdd} />
       ))}
     </div>
   );
